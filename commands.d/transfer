@@ -1,0 +1,4 @@
+#!/bin/bash
+
+printf "In %s days:\n" "$(uptime | awk '{print $3}')"
+ethtool -S eno1 | grep x_bytes | xargs | awk '{print "DL: "$2/1024/1024/1024"GB", "UL: "$4/1024/1024/1024"GB"}'
