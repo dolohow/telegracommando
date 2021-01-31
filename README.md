@@ -36,8 +36,9 @@ nohup python telegracommando.py &
 ## Custom scripts
 You can put your custom scripts in `commands.d` directory.  There are few
 already created for you to see how that works.  Command name in Telegram
-is the name of the script.  And don't forget to add executable permission
-like that
+is the name of the script.  You can also pass arguments to script, they would
+be available in bash as `$1`, `$2` and so on...  And don't forget to add
+executable permission like that:
 
 ```
 chmod +x commands.d/custom_script
@@ -46,6 +47,3 @@ chmod +x commands.d/custom_script
 ## Security
 You should probably not give access to this bot to people you don't trust. It
 was not designed with security in mind.
-
-## TODO
-Add way to pass arguments in secure and easy manner.

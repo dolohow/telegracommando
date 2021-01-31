@@ -1,30 +1,39 @@
 import configparser
 import logging
 import os
+import re
 
-from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read("telegracommando.ini")
 
-args = parser.parse_args()
-
 logging.basicConfig(
-    filename="telegracommando.log",
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
+VALID_ARGUMENT = re.compile("^[a-zA-Z0-9]+$")
+
 
 def cmd(update, context):
-    path = f"commands.d{update.message.text}"
+    msg = update.message.text.split(' ')
+    msg[0] = msg[0][1:]
+    for m in msg:
+        if not bool(VALID_ARGUMENT.match(m)):
+            update.message.reply_text("Command may only consist of letters and numbers", quote=False)
+            return
+    path = f"commands.d/{msg[0]}"
     if not os.path.exists(path):
         update.message.reply_text("No such command", quote=False)
         return
-    reply = os.popen(path).read()
-    update.message.reply_text(f"`{reply}`", quote=False, parse_mode="Markdown")
+
+    reply = os.popen(f"{path} {' '.join(msg[1:])}").read()
+    if reply:
+        update.message.reply_text(f"`{reply}`", quote=False, parse_mode="Markdown")
+    else:
+        update.message.reply_text("Command returned nothing", quote=False)
 
 
 def main():
