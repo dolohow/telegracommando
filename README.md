@@ -4,23 +4,27 @@ Telegracommando
 Run predefineed bash scripts and get output in telegram.
 
 
-## Installation
+## Running
+Configuration resides in file called `telegracommando.ini` which you must
+edit.
+
+### Docker (recommended)
+I prefer to use podman instead of docker, which I highly recommend:
+```
+podman run -d \
+    --name telegramcommando \
+    -v PATH_TO_CONFIG:/config \
+    -v PATH_TO_COMMANDS:/usr/src/app/commands.d \
+    dolohow/telegramcommando
+```
+
+### PIP
 You need Python 3 to run this program.
 
 ```
 pip install -r requirements.txt
 ```
 
-Create configuration file
-
-```
-cp tdpt.ini.template tdpt.ini
-```
-
-Edit and save
-
-
-## Running
 ```
 python telegracommando.py
 ```
