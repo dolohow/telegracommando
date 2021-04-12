@@ -19,6 +19,7 @@ VALID_ARGUMENT = re.compile("^[a-zA-Z0-9]+$")
 
 def cmd(update, context):
     msg = update.message.text.split(' ')
+    msg[0] = msg[0].split('@')[0]
     msg[0] = msg[0][1:]
     for m in msg:
         if not bool(VALID_ARGUMENT.match(m)):
