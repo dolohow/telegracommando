@@ -1,9 +1,3 @@
 #!/bin/bash
 
-CMD_OUTPUT=$(sudo firewall-cmd --list-all)
-
-printf "Services on cloud router:\n"
-printf "$CMD_OUTPUT" | grep -Po "(?<=services: ).+"
-printf "\n"
-printf "Forwarded ports:\n"
-printf "$CMD_OUTPUT" | grep -P -o "port=.*" | column -t -s:
+sudo firewall-cmd --list-all
