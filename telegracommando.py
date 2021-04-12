@@ -37,7 +37,8 @@ def cmd(update, context):
     msg[0] = msg[0][1:]
     for m in msg:
         if not bool(VALID_ARGUMENT.match(m)):
-            update.message.reply_text("Command may only consist of letters and numbers", quote=False)
+            update.message.reply_text(
+                "Command may only consist of letters and numbers", quote=False)
             return
     path = f"commands.d/{msg[0]}"
     if not os.path.exists(path):
@@ -46,7 +47,9 @@ def cmd(update, context):
 
     reply = os.popen(f"{path} {' '.join(msg[1:])}").read()
     if reply:
-        update.message.reply_text(f"`{reply}`", quote=False, parse_mode="Markdown")
+        update.message.reply_text(f"`{reply}`",
+                                  quote=False,
+                                  parse_mode="Markdown")
     else:
         update.message.reply_text("Command returned nothing", quote=False)
 
