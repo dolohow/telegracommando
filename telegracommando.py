@@ -1,12 +1,26 @@
+import argparse
 import configparser
 import logging
 import os
+import pathlib
 import re
 
 from telegram.ext import Updater, MessageHandler, Filters
 
+PARSER = argparse.ArgumentParser(
+    description='Torrent downloading progress on Telegram')
+PARSER.add_argument(
+    '--config',
+    action='store',
+    default='telegracommando.ini',
+    help='Path to configuration file',
+    metavar='PATH',
+    type=pathlib.Path,
+)
+ARGS = PARSER.parse_args()
+
 CONFIG = configparser.ConfigParser()
-CONFIG.read("telegracommando.ini")
+CONFIG.read(ARGS.config)
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
