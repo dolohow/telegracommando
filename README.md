@@ -50,4 +50,5 @@ chmod +x commands.d/custom_script
 
 ## Security
 You should probably not give access to this bot to people you don't trust. It
-was not designed with security in mind.
+was not designed with security in mind.  However I implemented some
+mitigation that might help a bit.
