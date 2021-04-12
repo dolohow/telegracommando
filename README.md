@@ -12,10 +12,10 @@ edit.
 I prefer to use podman instead of docker, which I highly recommend:
 ```
 podman run -d \
-    --name telegramcommando \
+    --name telegracommando \
     -v PATH_TO_CONFIG:/config \
     -v PATH_TO_COMMANDS:/usr/src/app/commands.d \
-    dolohow/telegramcommando
+    dolohow/telegracommando
 ```
 
 ### PIP
